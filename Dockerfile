@@ -1,11 +1,6 @@
 FROM debian:stretch-20200130
 
-# install curl for being able to install nvm
-# install libcairo2-dev libjpeg62-turbo-dev libpango1.0-dev libgif-dev build-essential g++ 
-#           for being able to install node package canvas
-# install python for node-gyp
-# install libegl1 libgles2 to get required shared libraries for tileserver-gl
-# install xvfb for tileserver-gl
+# install system dependenciesn, nvm, node 6.17.1 and tileserver-gl
 RUN apt-get update && apt-get install curl gnupg apt-transport-https -y && \
     apt-get install libcairo2-dev libjpeg62-turbo-dev libpango1.0-dev libgif-dev build-essential g++ -y && \
     apt-get install python -y && \
@@ -37,6 +32,7 @@ ADD ./runVarnish.sh /usr/local/bin/runVarnish
 ADD ./default.vcl /etc/varnish/default.vcl
 ADD ./docker-entry.sh /usr/local/bin/docker-entry
 
+# add backend-api code
 ADD ./backend-api /usr/src/backend-api
 WORKDIR /usr/src/backend-api
 RUN . /root/.bashrc && \
@@ -45,7 +41,4 @@ RUN . /root/.bashrc && \
 
 
 WORKDIR /root
-
-CMD [ "tail", "-f", "/dev/null" ]
-
 ENTRYPOINT [ "docker-entry" ]
