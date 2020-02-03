@@ -87,6 +87,11 @@ sub vcl_recv {
     return (pipe);
   }
 
+  # never cache health-check = url ending with /health
+  if (req.url ~ "^.*\/health$") {
+    return (pipe);
+  }
+
   # Only cache GET or HEAD requests. This makes sure the POST requests are always passed.
   if (req.method != "GET" && req.method != "HEAD") {
     return (pass);
@@ -159,7 +164,7 @@ sub vcl_backend_response {
   # Set 5h cache if unset for static files
   if (beresp.ttl <= 0s || beresp.http.Set-Cookie || beresp.http.Vary == "*") {
     # Important, you shouldn't rely on this, SET YOUR HEADERS in the backend
-    set beresp.ttl = 5h;
+    set beresp.ttl = ${CACHE_TTL};
     
     # Let the client ask for no-cache
     # https://varnish-cache.org/docs/5.1/users-guide/increasing-your-hitrate.html#pragma

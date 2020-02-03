@@ -17,9 +17,10 @@ RUN apt-get update && apt-get install curl gnupg apt-transport-https -y && \
     npm config set user 0 && \
     npm install -g tileserver-gl
 
-# install pm2 process manager
+# install more modern node version and pm2 process manager
 RUN . /root/.bashrc && \
     nvm install v12.14.1 && \
+    nvm alias default v12.14.1 && \
     npm install pm2 -g
 
 # install varnish
@@ -34,8 +35,17 @@ ADD ./runTileserver.sh /usr/local/bin/runTileserver
 ADD ./runVarnish.sh /usr/local/bin/runVarnish
 # add varnish configuration
 ADD ./default.vcl /etc/varnish/default.vcl
+ADD ./docker-entry.sh /usr/local/bin/docker-entry
+
+ADD ./backend-api /usr/src/backend-api
+WORKDIR /usr/src/backend-api
+RUN . /root/.bashrc && \
+    nvm use v12.14.1 && \
+    npm i --production /usr/src/backend-api
 
 
 WORKDIR /root
 
 CMD [ "tail", "-f", "/dev/null" ]
+
+ENTRYPOINT [ "docker-entry" ]

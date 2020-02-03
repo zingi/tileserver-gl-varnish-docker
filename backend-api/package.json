@@ -1,0 +1,26 @@
+{
+  "name": "backend-api",
+  "version": "1.0.0",
+  "description": "REST api for triggering actions on the tileserver and varnish cache.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/router": "^8.0.6",
+    "debug": "^4.1.1",
+    "koa": "^2.11.0",
+    "shelljs.exec": "^1.1.8"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}
