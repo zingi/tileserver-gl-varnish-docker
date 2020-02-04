@@ -16,7 +16,11 @@ RUN apt-get update && apt-get install curl gnupg apt-transport-https -y && \
 RUN . /root/.bashrc && \
     nvm install v12.14.1 && \
     nvm alias default v12.14.1 && \
-    npm install pm2 -g
+    npm install pm2 -g && \
+    pm2 install pm2-logrotate && \
+    pm2 set pm2-logrotate:max_size 100M && \
+    pm2 set pm2-logrotate:retain 7 && \
+    pm2 set pm2-logrotate:workerInterval 500
 
 ENV PATH=$PATH:/root/.nvm/versions/node/v12.14.1/bin/
 
