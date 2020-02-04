@@ -18,6 +18,8 @@ RUN . /root/.bashrc && \
     nvm alias default v12.14.1 && \
     npm install pm2 -g
 
+ENV PATH=$PATH:/root/.nvm/versions/node/v12.14.1/bin/
+
 # install varnish
 RUN curl -s https://packagecloud.io/install/repositories/varnishcache/varnish63/script.deb.sh | bash && \
     apt-get install varnish -y
