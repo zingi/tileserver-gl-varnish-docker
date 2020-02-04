@@ -8,6 +8,9 @@ module.exports = {
     name: "backend-api",
     script: "/usr/src/backend-api/server.js",
     exec_interpreter: "/root/.nvm/versions/node/v12.14.1/bin/node",
+    env: {
+      "DEBUG": "backend-api:*",
+    },
     time: true
   }]
 }

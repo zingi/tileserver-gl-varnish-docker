@@ -30,7 +30,7 @@ services:
     tmpfs: 
       - /usr/local/var/varnish:exec
     environment: 
-      # how long things should be cache; https://varnish-cache.org/docs/6.3/reference/vcl.html#durations
+      # how long things should be cached; https://varnish-cache.org/docs/6.3/reference/vcl.html#durations
       - CACHE_TTL=1d
 ```
 
@@ -79,3 +79,13 @@ On port 3000 a REST API is exposed to do actions on the tileserver and cache. It
   * to test if a connection can be established to the backend api
 * **POST** /reload
   * Restarts the tileserver and purges the whole cache. Should be called if the .mbtiles files have changed.
+
+## Check Logs
+
+### Tileserver-gl Logs
+
+`docker exec -it tileserver pm2 logs tileserver`
+
+### Backend API Logs
+
+`docker exec -it tileserver pm2 logs backend-api`
