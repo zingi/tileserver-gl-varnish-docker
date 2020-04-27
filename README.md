@@ -20,7 +20,7 @@ For ex.:
 version: '3.7'
 services: 
   tileserver:
-    build: .
+    image: zingi/tileserver-gl-varnish:tileserver-gl-3.0.0_varnish-6.4.0
     container_name: tileserver
     ports: 
       - 80:8080 # tileserver only likes to be exposed at standard port: 80/443

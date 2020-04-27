@@ -36,7 +36,7 @@ export DISPLAY=:${displayNumber}.${screenNumber}
 
 echo
 cd /data
-nvm use v6.17.1
+nvm use v10.20.1
 tileserver-gl -p 80 "$@" &
 child=$!
 wait "$child"

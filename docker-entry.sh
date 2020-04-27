@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . /root/.bashrc
-nvm use v12.14.1
+nvm use v14.0.0
 
 # start tileserver and backend-api
 pm2 -s start /root/ecosystem.config.js
